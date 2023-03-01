@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DataBarangController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -12,15 +14,17 @@ use Illuminate\Support\Facades\Route;
 | routes are loaded by the RouteServiceProvider and all of them will
 | be assigned to the "web" middleware group. Make something great!
 |
-*/
+ */
 
 Route::get('/', function () {
     return view('landing-page');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('auth', 'verified');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -28,4 +32,13 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+
+// Route::get('data-barang', [DataBarangController::class, 'index']);
+// Route::post('data-barang/tambah-data', [DataBarangController::class, 'store'])->name('databarang.store');
+// Route::get('data-barang/list', [DataBarangController::class, 'getDataBarang'])->name('databarang.list');
+
+Route::resource('data-barang', DataBarangController::class)->middleware('auth', 'verified');
+Route::get('data-barang-get', [DataBarangController::class, 'getDataBarang'])->name('data-barang-get')->middleware('auth', 'verified');
+// Route::get('data-barang', [DataBarangController::class, 'index'])->middleware('auth', 'verified');
+
+require __DIR__ . '/auth.php';
