@@ -56,18 +56,18 @@ class DataBarangController extends Controller
             'harga_barang' => 'required',
             'stok_barang' => 'required',
             'kategori_id' => 'required',
-            'image' => '',
+            // 'image' => '',
         ]);
 
-        if ($request->file('image')) {
-            $validatedData['image'] = $request->file('image')->store('data-images');
-        }
+        // if ($request->file('image')) {
+        //     $validatedData['image'] = $request->file('image')->store('data-images');
+        // }
 
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()->all()]);
         }
 
-        dd($request->all());
+        // dd($request->all());
         $databarang->storeData($request->all());
 
         return response()->json(['success' => 'Article added successfully']);

@@ -106,20 +106,15 @@
                         <label for="stok">Stok:</label>
                         <input type="text" class="form-control" name="stok_barang" id="stok_barang">
                     </div>
-
+{{--
                     <div class="form-group">
                         <label for="image">Foto Barang</label>
                         <img class="img-preview img-fluid mb-3 col-sm-5">
 
                         <input class="form-control @error('image') is-invalid @enderror" type="file" id="image"
                             name="image" onchange="previewImage()">
-                        {{-- <input type="file" name="image" id="image"> --}}
 
-                        {{-- <input type="file" class="custom-file-input" id="image" name="image" required=""> --}}
-                        {{-- <label class="custom-file-label" for="validatedCustomFile">Choose file...</label> --}}
-                        {{-- <div class="invalid-feedback">Example invalid custom file feedback</div> --}}
-                        {{-- <input type="file" name="image" id="image"> --}}
-                    </div>
+                    </div> --}}
 
                     <div class="form-group">
                         <label for="exampleFormControlSelect1">Kategori</label>
@@ -270,7 +265,7 @@
                     harga_barang: $('#harga_barang').val(),
                     stok_barang: $('#stok_barang').val(),
                     kategori_id: $('#kategori_id').val(),
-                    image: $('#image').attr('files'),
+                    // image: $('#image').val(),
                 },
                 success: function(result) {
                     if(result.errors) {
@@ -402,17 +397,17 @@
         });
     });
 
-    function previewImage() {
-            const image = document.querySelector('#image');
-            const imgPreview = document.querySelector('.img-preview');
+    // function previewImage() {
+    //         const image = document.querySelector('#image');
+    //         const imgPreview = document.querySelector('.img-preview');
 
-            imgPreview.style.display = 'block';
+    //         imgPreview.style.display = 'block';
 
-            const oFReader = new FileReader();
-            oFReader.readAsDataURL(image.files[0]);
+    //         const oFReader = new FileReader();
+    //         oFReader.readAsDataURL(image.files[0]);
 
-            oFReader.onload = function(oFREvent) {
-                imgPreview.src = oFREvent.target.result;
-            }
-        }
+    //         oFReader.onload = function(oFREvent) {
+    //             imgPreview.src = oFREvent.target.result;
+    //         }
+    //     }
 </script>
