@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\DataBarang;
 use App\Models\Kategori;
-use DataTables;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Yajra\DataTables\DataTables as DataTables;
 
 class DataBarangController extends Controller
 {
@@ -18,7 +18,6 @@ class DataBarangController extends Controller
     {
         $kategori = Kategori::all();
         return view('master-data.data-barang', compact('kategori'));
-
     }
 
     public function getDataBarang(Request $request, DataBarang $databarang)
@@ -26,7 +25,7 @@ class DataBarangController extends Controller
 
         $data = DataBarang::all();
         if ($request->ajax()) {
-            return Datatables::of($data)
+            return DataTables::of($data)
                 ->addColumn('Actions', function ($data) {
                     return '<button type="button" class="btn btn-success btn-sm" id="getEditArticleData" data-id="' . $data->id . '">Edit</button>
                     <button type="button" data-id="' . $data->id . '" data-toggle="modal" data-target="#DeleteArticleModal" class="btn btn-danger btn-sm" id="getDeleteId">Delete</button>';
@@ -35,7 +34,6 @@ class DataBarangController extends Controller
                 ->addIndexColumn()
                 ->make(true);
         }
-
     }
 
     /**
@@ -55,7 +53,7 @@ class DataBarangController extends Controller
             'nama_barang' => 'required',
             'harga_barang' => 'required',
             'stok_barang' => 'required',
-            'kategori_id' => 'required',
+            // 'kategori_id' => 'required',
             // 'image' => '',
         ]);
 
@@ -71,7 +69,6 @@ class DataBarangController extends Controller
         $databarang->storeData($request->all());
 
         return response()->json(['success' => 'Article added successfully']);
-
     }
 
     /**
@@ -112,7 +109,7 @@ class DataBarangController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $validator = \Validator::make($request->all(), [
+        $validator = Validator::make($request->all(), [
             'nama_barang' => 'required',
             'harga_barang' => 'required',
             'stok_barang' => 'required',
@@ -128,21 +125,18 @@ class DataBarangController extends Controller
         $databarang->updateData($id, $request->all());
 
         return response()->json(['success' => 'Article updated successfully']);
-
     }
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
-    {
-        {
+    { {
             $databarang = new DataBarang;
             $databarang->deleteData($id);
 
             // return redirect('data-barang')->with(['success' => 'Berhasil Hapus Data']);
             return response()->json(['success' => 'Article deleted successfully']);
-
         }
     }
 }

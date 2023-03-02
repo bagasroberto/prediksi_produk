@@ -1,75 +1,72 @@
 @extends('layouts.app')
 
 @section('page-header')
-
-<div class="pcoded-content">
-    <!-- [ breadcrumb ] start -->
-    <div class="page-header">
-        <div class="page-block">
-            <div class="row align-items-center">
-                <div class="col-md-12">
-                    <div class="page-header-title">
-                        <h5 class="m-b-10">Master Barang</h5>
+    <div class="pcoded-content">
+        <!-- [ breadcrumb ] start -->
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
+                            <h5 class="m-b-10">Master Barang</h5>
+                        </div>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="dashboard"><i class="feather icon-home"></i></a>
+                            </li>
+                            <li class="breadcrumb-item"><a href="#!">Master Barang</a></li>
+                            <li class="breadcrumb-item"><a href="data-barang">Data Barang</a></li>
+                        </ul>
                     </div>
-                    <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="dashboard"><i class="feather icon-home"></i></a>
-                        </li>
-                        <li class="breadcrumb-item"><a href="#!">Master Barang</a></li>
-                        <li class="breadcrumb-item"><a href="data-barang">Data Barang</a></li>
-                    </ul>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- [ breadcrumb ] end -->
-    <!-- [ Main Content ] start -->
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="card">
-                <div class="card-header">
-                    <div class="row">
-                        <div class="col">
-                            <h5>Data Barang</h5>
+        <!-- [ breadcrumb ] end -->
+        <!-- [ Main Content ] start -->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col">
+                                <h5>Data Barang</h5>
+                            </div>
+                            <div class="col">
+                                <button style="float: right" type="button" class="btn btn-info btn-sm" data-toggle="modal"
+                                    data-target="#CreateArticleModal"><i class="fas mr-2 fa-plus"></i>
+                                    Tambah
+                                    Data</button>
+                            </div>
                         </div>
-                        <div class="col">
-                            <button style="float: right" type="button" class="btn btn-info btn-sm" data-toggle="modal"
-                                data-target="#CreateArticleModal"><i class="fas mr-2 fa-plus"></i>
-                                Tambah
-                                Data</button>
 
-                        </div>
                     </div>
 
-                </div>
-
-                <div class="card-body">
-                    <table class="table table-striped table-bordered datatable">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Nama Produk</th>
-                                <th>Harga</th>
-                                <th>Stok</th>
-
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
+                    <div class="card-body">
+                        <table class="table table-striped table-bordered datatable">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nama Produk</th>
+                                    <th>Harga</th>
+                                    <th>Stok</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
+            <!-- [ form-element ] start -->
+
+            <!-- [ form-element ] end -->
         </div>
-        <!-- [ form-element ] start -->
+        <!-- [ Main Content ] end -->
 
-        <!-- [ form-element ] end -->
     </div>
-    <!-- [ Main Content ] end -->
 
-</div>
-
-<!-- Create Article Modal -->
-{{-- <form action="POST" enctype="multipart/form-data" id="SubmitCreateArticleForm">
+    <!-- Create Article Modal -->
+    {{-- <form action="POST" enctype="multipart/form-data" id="SubmitCreateArticleForm">
     @csrf --}}
 
 
@@ -106,7 +103,7 @@
                         <label for="stok">Stok:</label>
                         <input type="text" class="form-control" name="stok_barang" id="stok_barang">
                     </div>
-{{--
+                    {{--
                     <div class="form-group">
                         <label for="image">Foto Barang</label>
                         <img class="img-preview img-fluid mb-3 col-sm-5">
@@ -121,9 +118,8 @@
                         <select class="form-control" id="exampleFormControlSelect1">
                             <option selected>Pilih Kategori</option>
                             @foreach ($kategori as $item)
-
-                            <option value="{{ $item->id }}" id="kategori_id">{{ $item->nama_kategori }}
-                            </option>
+                                <option value="{{ $item->id }}" id="kategori_id">{{ $item->nama_kategori }}
+                                </option>
                             @endforeach
                         </select>
                     </div>
@@ -140,76 +136,72 @@
     {{--
 </form> --}}
 
-<!-- Edit Article Modal -->
-<div class="modal" id="EditArticleModal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <h5 class="modal-title">Edit Data</h5>
-                <button type="button" class="close modelClose" data-dismiss="modal">&times;</button>
-            </div>
-            <!-- Modal body -->
-            <div class="modal-body">
-                <div class="alert alert-danger alert-dismissible fade show" role="alert" style="display: none;">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+    <!-- Edit Article Modal -->
+    <div class="modal" id="EditArticleModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Data</h5>
+                    <button type="button" class="close modelClose" data-dismiss="modal">&times;</button>
                 </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert" style="display: none;">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert" style="display: none;">
+                        <strong>Success!</strong>Article was added successfully.
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div id="EditArticleModalBody">
+
+                    </div>
+                </div>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" id="SubmitEditArticleForm">Update</button>
+                    <button type="button" class="btn btn-danger modelClose" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Article Modal -->
+    <div class="modal" id="DeleteArticleModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+
                 <div class="alert alert-success alert-dismissible fade show" role="alert" style="display: none;">
-                    <strong>Success!</strong>Article was added successfully.
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <strong>Success!</strong>Deleted Data Successfully.
                 </div>
-                <div id="EditArticleModalBody">
-
+                <div class="modal-header">
+                    <h4 class="modal-title">Data Delete</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
-            </div>
-            <!-- Modal footer -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-success" id="SubmitEditArticleForm">Update</button>
-                <button type="button" class="btn btn-danger modelClose" data-dismiss="modal">Close</button>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <h4>Are you sure want to delete this Data?</h4>
+                </div>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" id="SubmitDeleteArticleForm">Yes</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
-
-<!-- Delete Article Modal -->
-<div class="modal" id="DeleteArticleModal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <!-- Modal Header -->
-
-            <div class="alert alert-success alert-dismissible fade show" role="alert" style="display: none;">
-                <strong>Success!</strong>Deleted Data Successfully.
-            </div>
-            <div class="modal-header">
-                <h4 class="modal-title">Data Delete</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            <!-- Modal body -->
-            <div class="modal-body">
-                <h4>Are you sure want to delete this Data?</h4>
-            </div>
-            <!-- Modal footer -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" id="SubmitDeleteArticleForm">Yes</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
 @endsection
 @push('script')
-
-<script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/1.13.3/js/dataTables.bootstrap4.min.js"></script>
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.13.3/js/dataTables.bootstrap4.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script>
 @endpush
 
 
@@ -220,10 +212,10 @@
 
 <script type="text/javascript">
     $.ajaxSetup({
-    headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-});
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
 
 
     $(document).ready(function() {
@@ -233,15 +225,37 @@
             serverSide: true,
             autoWidth: false,
             pageLength: 10,
+            columnDefs: [{
+                type: 'currency',
+                targets: 3
+            }],
             // scrollX: true,
-            "order": [[ 0, "asc" ]],
+            "order": [
+                [0, "asc"]
+            ],
             ajax: '{{ route('data-barang-get') }}',
-            columns: [
-                {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-                {data: 'nama_barang', name: 'nama_barang'},
-                {data: 'harga_barang', name: 'harga_barang'},
-                {data: 'stok_barang', name: 'stok_barang'},
-                {data: 'Actions', name: 'Actions',orderable:false,serachable:false,sClass:'text-center'},
+            columns: [{
+                    data: 'DT_RowIndex',
+                    name: 'DT_RowIndex'
+                },
+                {
+                    data: 'nama_barang',
+                    name: 'nama_barang'
+                },
+                {
+                    data: 'harga_barang',
+                    render: $.fn.dataTable.render.number(',', '.', 3, 'Rp. ')
+                },
+                {
+                    data: 'stok_barang',
+                },
+                {
+                    data: 'Actions',
+                    name: 'Actions',
+                    orderable: false,
+                    serachable: false,
+                    sClass: 'text-center'
+                },
             ]
         });
 
@@ -268,20 +282,20 @@
                     // image: $('#image').val(),
                 },
                 success: function(result) {
-                    if(result.errors) {
+                    if (result.errors) {
                         $('.alert-danger').html('');
                         $.each(result.errors, function(key, value) {
                             $('.alert-danger').show();
-                            $('.alert-danger').append('<strong><li>'+value+'</li></strong>');
+                            $('.alert-danger').append('<strong><li>' + value +
+                                '</li></strong>');
                         });
                     } else {
                         $('.alert-danger').hide();
                         $('.alert-success').show();
                         $('.datatable').DataTable().ajax.reload();
-                        setInterval(function(){
+                        setInterval(function() {
                             $('.alert-success').hide();
                             $('#CreateArticleModal').modal('hide');
-                            location.reload();
                         }, 2000);
                     }
                 }
@@ -289,7 +303,7 @@
         });
 
         // Get single article in EditModel
-        $('.modelClose').on('click', function(){
+        $('.modelClose').on('click', function() {
             $('#EditArticleModal').hide();
         });
         var id;
@@ -299,7 +313,7 @@
             $('.alert-danger').hide();
             id = $(this).data('id');
             $.ajax({
-                url: "data-barang/"+id+"/edit",
+                url: "data-barang/" + id + "/edit",
                 method: 'GET',
                 // data: {
                 //     id: id,
@@ -321,7 +335,7 @@
                 }
             });
             $.ajax({
-                url: "data-barang/"+id,
+                url: "data-barang/" + id,
                 method: 'PUT',
                 data: {
                     nama_barang: $('#editNamaBarang').val(),
@@ -329,21 +343,20 @@
                     stok_barang: $('#editStokBarang').val(),
                 },
                 success: function(result) {
-                    if(result.errors) {
+                    if (result.errors) {
                         $('.alert-danger').html('');
                         $.each(result.errors, function(key, value) {
                             $('.alert-danger').show();
-                            $('.alert-danger').append('<strong><li>'+value+'</li></strong>');
+                            $('.alert-danger').append('<strong><li>' + value +
+                                '</li></strong>');
                         });
                     } else {
                         $('.alert-danger').hide();
                         $('.alert-success').show();
                         $('.datatable').DataTable().ajax.reload();
-                        setInterval(function(){
+                        setInterval(function() {
                             $('.alert-success').hide();
                             $('#EditArticleModal').hide();
-                            location.reload();
-
                         }, 2000);
                     }
                 }
@@ -352,7 +365,7 @@
 
         // Delete article Ajax request.
         var deleteID;
-        $('body').on('click', '#getDeleteId', function(){
+        $('body').on('click', '#getDeleteId', function() {
             deleteID = $(this).data('id');
         })
         $('#SubmitDeleteArticleForm').click(function(e) {
@@ -364,16 +377,15 @@
                 }
             });
             $.ajax({
-                url: "data-barang/"+id,
+                url: "data-barang/" + id,
                 method: 'DELETE',
                 success: function(result) {
-                        $('.alert-danger').hide();
-                        $('.alert-success').show();
-                        $('.datatable').DataTable().ajax.reload();
-                        setInterval(function(){
-                            $('#CreateArticleModal').modal('hide');
-                            location.reload();
-                        }, 2000);
+                    $('.alert-danger').hide();
+                    $('.alert-success').show();
+                    $('.datatable').DataTable().ajax.reload();
+                    setInterval(function() {
+                        $('#CreateArticleModal').modal('hide');
+                    }, 2000);
 
                 }
                 // success: function(result) {
