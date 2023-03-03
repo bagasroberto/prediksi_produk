@@ -41,7 +41,7 @@
                     </div>
 
                     <div class="card-body">
-                        <table class="table table-striped table-bordered datatable">
+                        <table class="table table-striped table-bordered datatable table-responsive-md" style="width:100%;">
                             <thead>
                                 <tr>
                                     <th>No</th>
@@ -197,6 +197,7 @@
         </div>
     </div>
 @endsection
+
 @push('script')
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.13.3/js/dataTables.bootstrap4.min.js"></script>
@@ -291,7 +292,13 @@
                         });
                     } else {
                         $('.alert-danger').hide();
-                        $('.alert-success').show();
+                         swal({
+                            type: 'success',
+                            icon: 'success',
+                            title: `${result.message}`,
+                            showConfirmButton: false,
+                            timer: 3000
+                        });
                         $('.datatable').DataTable().ajax.reload();
                         setInterval(function() {
                             $('.alert-success').hide();

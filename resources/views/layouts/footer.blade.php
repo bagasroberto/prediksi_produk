@@ -46,6 +46,13 @@
 <!-- Warning Section Ends -->
 
 <!-- Required Js -->
+<script>
+    $(document).ready(function() {
+        $('#myTable').DataTable();
+    });
+</script>
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="assets/js/vendor-all.min.js"></script>
 <script src="assets/js/plugins/bootstrap.min.js"></script>
 <script src="assets/js/pcoded.min.js"></script>

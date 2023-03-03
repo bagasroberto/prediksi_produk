@@ -68,7 +68,7 @@ class DataBarangController extends Controller
         // dd($request->all());
         $databarang->storeData($request->all());
 
-        return response()->json(['success' => 'Article added successfully']);
+        return response()->json(['message' => 'Data Barang added successfully']);
     }
 
     /**

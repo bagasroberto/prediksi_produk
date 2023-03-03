@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DataBarangController;
+use App\Http\Controllers\DataSupplierController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,25 +21,25 @@ Route::get('/', function () {
     return view('landing-page');
 });
 
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('auth', 'verified');
-
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::group(['middleware' => ['verified', 'auth']], function () {
 
-// Route::get('data-barang', [DataBarangController::class, 'index']);
-// Route::post('data-barang/tambah-data', [DataBarangController::class, 'store'])->name('databarang.store');
-// Route::get('data-barang/list', [DataBarangController::class, 'getDataBarang'])->name('databarang.list');
+    // Dashboard
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-Route::resource('data-barang', DataBarangController::class)->middleware('auth', 'verified');
-Route::get('data-barang-get', [DataBarangController::class, 'getDataBarang'])->name('data-barang-get')->middleware('auth', 'verified');
-// Route::get('data-barang', [DataBarangController::class, 'index'])->middleware('auth', 'verified');
+    // Get Data Barang
+    Route::get('data-barang-get', [DataBarangController::class, 'getDataBarang'])->name('data-barang-get');
+    // Data Barang Resource
+    Route::resource('data-barang', DataBarangController::class);
+
+    // Data Supplier Resource
+    Route::resource('data-supplier', DataSupplierController::class);
+
+});
 
 require __DIR__ . '/auth.php';
