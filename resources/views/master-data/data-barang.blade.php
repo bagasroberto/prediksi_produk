@@ -48,6 +48,7 @@
                                     <th>Nama Produk</th>
                                     <th>Harga</th>
                                     <th>Stok</th>
+                                    <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -70,7 +71,7 @@
     @csrf --}}
 
 
-    <div class="modal" id="CreateArticleModal">
+    <div class="modal fade" id="CreateArticleModal">
         <div class="modal-dialog">
             <div class="modal-content">
                 <!-- Modal Header -->
@@ -172,7 +173,7 @@
     </div>
 
     <!-- Delete Article Modal -->
-    <div class="modal" id="DeleteArticleModal">
+    <div class="modal fade" id="DeleteArticleModal">
         <div class="modal-dialog">
             <div class="modal-content">
                 <!-- Modal Header -->
@@ -251,6 +252,9 @@
                     data: 'stok_barang',
                 },
                 {
+                    data: 'status',
+                },
+                {
                     data: 'Actions',
                     name: 'Actions',
                     orderable: false,
@@ -292,7 +296,7 @@
                         });
                     } else {
                         $('.alert-danger').hide();
-                         swal({
+                        swal({
                             type: 'success',
                             icon: 'success',
                             title: `${result.message}`,
@@ -300,6 +304,10 @@
                             timer: 3000
                         });
                         $('.datatable').DataTable().ajax.reload();
+                        $('#nama_barang').val('');
+                        $('#harga_barang').val('');
+                        $('#stok_barang').val();
+                        $('#kategori_id').val();
                         setInterval(function() {
                             $('.alert-success').hide();
                             $('#CreateArticleModal').modal('hide');

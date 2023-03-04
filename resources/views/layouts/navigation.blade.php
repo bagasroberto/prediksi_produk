@@ -42,7 +42,7 @@
                     <ul class="pcoded-submenu">
                         <li><a href="data-barang">Data Barang</a></li>
                         <li><a href="layout-vertical.html" target="_blank">Kategori Barang</a></li>
-                        <li><a href="layout-vertical.html" target="_blank">Discontinue Barang</a></li>
+                        <li><a href="data-barangDisc">Discontinue Barang</a></li>
                         <li><a href="data-supplier">Supplier</a></li>
                     </ul>
                 </li>
@@ -51,7 +51,7 @@
                     <a href="#!" class="nav-link "><span class="pcoded-micon"><i
                                 class="feather icon-layout"></i></span><span class="pcoded-mtext">Transaksi</span></a>
                     <ul class="pcoded-submenu">
-                        <li><a href="layout-vertical.html" target="_blank">Penerimaan Barang</a></li>
+                        <li><a href="terima-barang">Penerimaan Barang</a></li>
                         <li><a href="layout-vertical.html" target="_blank">Pengeluaran Barang</a></li>
                         <li><a href="layout-vertical.html" target="_blank">Pemesanan ke Supplier</a></li>
                     </ul>

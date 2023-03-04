@@ -21,7 +21,7 @@ class DataSupplierController extends Controller
             return Datatables::of($suppliers)
                 ->addIndexColumn()
                 ->addColumn('nama', function ($supplier) {
-                    return ucfirst($supplier->nama_supplier);
+                    return strtoupper($supplier->nama_supplier);
                 })
                 ->addColumn('email_supplier', function ($supplier) {
                     return ucfirst($supplier->email_supplier);
@@ -139,13 +139,13 @@ class DataSupplierController extends Controller
             $dataSupplier->update([
                 'status_supplier' => 'aktif'
             ]);
-            return response()->json(['status' => 'Berhasil Menampilkan Data Kembali!']);
+            return response()->json(['status' => 'Berhasil Menampilkan Data!']);
         } else {
             $dataSupplier->update([
                 'status_supplier' => 'non-aktif'
             ]);
 
-            return response()->json(['status' => 'Berhasil Mengarsipkan Data Kembali!']);
+            return response()->json(['status' => 'Berhasil Mengarsipkan Data!']);
         }
     }
 }

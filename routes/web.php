@@ -2,8 +2,11 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DataBarangController;
+use App\Http\Controllers\DataBarangDiscController;
 use App\Http\Controllers\DataSupplierController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TerimaBarangController;
+use App\Models\TerimaBarang;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,6 +43,18 @@ Route::group(['middleware' => ['verified', 'auth']], function () {
     // Data Supplier Resource
     Route::resource('data-supplier', DataSupplierController::class);
 
+    // Data Barang Discontinue Resource
+    Route::resource('data-barangDisc', DataBarangDiscController::class);
+
+    // Terima Barang Discontinue Resource
+    Route::resource('terima-barang', TerimaBarangController::class);
+
 });
+
+Route::get('/coba', function(){
+    return
+    $terimas = TerimaBarang::with(['supplier', 'barang'])->get();
+});
+
 
 require __DIR__ . '/auth.php';

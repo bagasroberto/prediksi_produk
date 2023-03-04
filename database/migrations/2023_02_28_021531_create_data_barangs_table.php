@@ -15,12 +15,13 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('kategori_id')->nullable();
             $table->string('nama_barang');
-            $table->integer('harga_barang');
-            // $table->string('image');
-            $table->string('stok_barang');
+            $table->integer('harga_barang')->nullable();
+            $table->integer('stok_barang')->nullable();
+            $table->integer('stok_rusak')->nullable();
+            $table->string('status')->default('aktif');
             $table->timestamps();
-
             $table->foreign('kategori_id')->references('id')->on('kategori')->onDelete('cascade');
+            // $table->string('image');
             // $table->foreignId('kategori_id')->constrained();
             // $table->foreign('kategori_id')->references('id')->on('kategoris')->constrained();
 

@@ -38,4 +38,8 @@ class DataBarang extends Model
         return static::find($id)->delete();
     }
 
+    public function barangs()
+    {
+        $this->hasMany(TerimaBarang::class, 'barang_id');
+    }
 }

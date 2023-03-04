@@ -14,7 +14,7 @@
                             <li class="breadcrumb-item"><a href="dashboard"><i class="feather icon-home"></i></a>
                             </li>
                             <li class="breadcrumb-item"><a href="#!">Master Barang</a></li>
-                            <li class="breadcrumb-item"><a href="data-barang">Data Barang</a></li>
+                            <li class="breadcrumb-item"><a href="data-supplier">Data Suppliers</a></li>
                         </ul>
                     </div>
                 </div>
