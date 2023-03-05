@@ -20375,6 +20375,15 @@ pre[class*=language-]:before {
     min-width: 20px;
 }
 
+.pcoded-header .dropdown .dropdown-toggles {
+    line-height: 56px;
+    display: inline-block;
+    text-align: center;
+    position: relative;
+    min-width: 20px;
+    margin-top: 20px;
+}
+
 .pcoded-header .dropdown .dropdown-toggle > i {
     font-size: 16px;
 }

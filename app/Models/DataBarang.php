@@ -38,4 +38,8 @@ class DataBarang extends Model
         return static::find($id)->delete();
     }
 
+    public function kategori(){
+        return $this->hasMany(Kategori::class, 'kategori_id');
+    }
+
 }

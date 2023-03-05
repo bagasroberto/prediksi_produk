@@ -15,7 +15,7 @@
                         <li class="breadcrumb-item"><a href="dashboard"><i class="feather icon-home"></i></a>
                         </li>
                         <li class="breadcrumb-item"><a href="#!">Master Barang</a></li>
-                        <li class="breadcrumb-item"><a href="data-barang">Data Barang</a></li>
+                        <li class="breadcrumb-item"><a href="data-barang">Data Kategori Barang</a></li>
                     </ul>
                 </div>
             </div>
@@ -30,7 +30,7 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col">
-                            <h5>Data Barang</h5>
+                            <h5>Data Kategori Barang</h5>
                         </div>
                         <div class="col">
                             <button style="float: right" type="button" class="btn btn-info btn-sm" data-toggle="modal"
@@ -42,24 +42,12 @@
 
                 </div>
                 <div class="card-body">
-                    <div class="form-group">
-                        <label><strong>Status :</strong></label>
-                        <select id='filter_status' class="form-control form-control-sm" style="width: 200px">
-                            <option value="">--Select Status--</option>
-                            <option value="aktif">Active</option>
-                            <option value="non-aktif">Deactive</option>
-                        </select>
-                    </div>
-                    <div class="divider"></div>
                     <table class="table table-striped table-bordered datatable">
                         <thead>
                             <tr>
-                                <th>No</th>
-                                <th>Nama Produk</th>
-                                <th>Harga</th>
-                                <th>Stok</th>
-                                <th>Status</th>
-                                <th>Action</th>
+                                <th style="width : 10%;">No</th>
+                                <th>Nama Kategori</th>
+                                <th style="width : 20%;" class="text-center">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -73,10 +61,6 @@
         <!-- [ form-element ] end -->
     </div>
     <!-- [ Main Content ] end -->
-
-
-
-
 
     <div class="modal" id="CreateArticleModal">
         <div class="modal-dialog">
@@ -100,47 +84,9 @@
                         </button>
                     </div>
                     <div class="form-group">
-                        <label for="nama_produk">Nama Produk:</label>
-                        <input type="text" class="form-control" name="nama_barang" id="nama_barang">
+                        <label for="nama_kategori">Nama Kategori:</label>
+                        <input type="text" class="form-control" name="nama_kategori" id="nama_kategori">
                     </div>
-                    <div class="form-group">
-                        <label for="harga">Harga:</label>
-                        <input type="text" class="form-control" name="harga_barang" id="harga_barang">
-                    </div>
-                    <div class="form-group">
-                        <label for="stok">Stok:</label>
-                        <input type="text" class="form-control" name="stok_barang" id="stok_barang">
-                    </div>
-                    {{--
-                    <div class="form-group">
-                        <label for="image">Foto Barang</label>
-                        <img class="img-preview img-fluid mb-3 col-sm-5">
-
-                        <input class="form-control @error('image') is-invalid @enderror" type="file" id="image"
-                            name="image" onchange="previewImage()">
-
-                    </div> --}}
-
-                    <div class="form-group">
-                        <label for="exampleFormControlSelect1">Kategori</label>
-                        <select class="form-control" id="kategori_id" name="kategori_id">
-                            <option selected>Pilih Kategori</option>
-                            @foreach ($kategori as $item)
-                            <option value="{{ $item->id }}" id="kategori_id">{{
-                                $item->nama_kategori}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="status">Status</label>
-                        <select class="form-control" name="status" id="status">
-                            <option selected>Pilih status</option>
-                            <option value="aktif">Aktif</option>
-                            <option value="non-aktif">Non Aktif</option>
-                        </select>
-                    </div>
-
                 </div>
                 <!-- Modal footer -->
                 <div class="modal-footer">
@@ -150,9 +96,6 @@
             </div>
         </div>
     </div>
-
-    {{--
-    </form> --}}
 
     <!-- Edit Article Modal -->
     <div class="modal" id="EditArticleModal">
@@ -220,6 +163,7 @@
 
 @endsection
 
+
 @push('script')
 
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
@@ -228,11 +172,8 @@
 <script type="text/javascript" src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script>
 @endpush
 
-
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js">
-</script>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
 
 <script type="text/javascript">
     $.ajaxSetup({
@@ -253,28 +194,12 @@
             pageLength: 10,
             // scrollX: true,
             "order": [[ 0, "asc" ]],
-            ajax: {
-                url: "{{ route('data-barang-get') }}",
-                data: function (d) {
-                        d.filter_status = $('#filter_status').val()
-                    }
-                },
-
-            // ajax: '{{ route('data-barang-get') }}',
+            ajax: '{{ route('kategori-get') }}',
             columns: [
-                {data: 'DT_RowIndex', name: 'id'},
-                {data: 'nama_barang', name: 'nama_barang'},
-                {data: 'harga_barang',render: $.fn.dataTable.render.number(',', '.', 3, 'Rp. ')},
-                {data: 'stok_barang', name: 'stok_barang'},
-                {data: 'statusBadge', name: 'statusBadge',orderable:false,serachable:false,sClass:'text-center'},
+                {data: 'id', name: 'id'},
+                {data: 'nama_kategori', name: 'nama_kategori'},
                 {data: 'Actions', name: 'Actions',orderable:false,serachable:false,sClass:'text-center'},
             ]
-        });
-
-
-        // Filter Status
-        $('#filter_status').change(function(){
-            dataTable.draw();
         });
 
         // Create article Ajax request.
@@ -286,15 +211,14 @@
                 }
             });
             $.ajax({
-                url: "{{ route('data-barang.store') }}",
-
+                url: "{{ route('kategori.store') }}",
+                // enctype: 'multipart/form-data',
+                // processData: false,  // Important!
+                // contentType: false,
+                // cache: false,
                 method: 'post',
                 data: {
-                    nama_barang: $('#nama_barang').val(),
-                    harga_barang: $('#harga_barang').val(),
-                    stok_barang: $('#stok_barang').val(),
-                    kategori_id: $('#kategori_id').val(),
-                    status: $('#status').val()
+                    nama_kategori: $('#nama_kategori').val()
                     // image: $('#image').val(),
                 },
                 success: function(result) {
@@ -329,7 +253,7 @@
             $('.alert-danger').hide();
             id = $(this).data('id');
             $.ajax({
-                url: "data-barang/"+id+"/edit",
+                url: "kategori/"+id+"/edit",
                 method: 'GET',
                 // data: {
                 //     id: id,
@@ -351,14 +275,10 @@
                 }
             });
             $.ajax({
-                url: "data-barang/"+id,
+                url: "kategori/"+id,
                 method: 'PUT',
                 data: {
-                    nama_barang: $('#editNamaBarang').val(),
-                    harga_barang: $('#editHargaBarang').val(),
-                    stok_barang: $('#editStokBarang').val(),
-                    kategori_id: $('#editKategori').val(),
-                    status: $('#editStatus').val(),
+                    nama_kategori: $('#editNamaKategori').val()
                 },
                 success: function(result) {
                     if(result.errors) {
@@ -396,7 +316,7 @@
                 }
             });
             $.ajax({
-                url: "data-barang/"+id,
+                url: "kategori/"+id,
                 method: 'DELETE',
                 success: function(result) {
                         $('.alert-danger').hide();
@@ -414,3 +334,4 @@
     });
 
 </script>
+

@@ -8,13 +8,13 @@
             <div class="row align-items-center">
                 <div class="col-md-12">
                     <div class="page-header-title">
-                        <h5 class="m-b-10">Form Elements</h5>
+                        <h5 class="m-b-10">Dashboard</h5>
                     </div>
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a>
                         </li>
-                        <li class="breadcrumb-item"><a href="#!">Form Components</a></li>
-                        <li class="breadcrumb-item"><a href="#!">Form Elements</a></li>
+                        <li class="breadcrumb-item"><a href="#!">Navigation</a></li>
+                        <li class="breadcrumb-item"><a href="#!">Dashboard</a></li>
                     </ul>
                 </div>
             </div>
@@ -26,9 +26,9 @@
         <div class="col-sm-12">
             <div class="card">
                 <div class="card-header">
-                    <h5>Basic Component</h5>
+                    <h5>Halaman Dashboard</h5>
                 </div>
-                <div class="card-body">
+                {{-- <div class="card-body">
                     <form>
                         <div class="row">
                             <div class="col-sm-4">
@@ -52,7 +52,7 @@
                             </div>
                         </div>
                     </form>
-                </div>
+                </div> --}}
             </div>
         </div>
         <!-- [ form-element ] start -->
@@ -63,3 +63,8 @@
 
 </div>
 @endsection
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js">
+</script>
+
