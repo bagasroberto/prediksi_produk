@@ -5,13 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TerimaBarang extends Model
+class Stok extends Model
 {
     use HasFactory;
 
-    // protected $guarded = ['id', 'created_at', 'updated_at'];
-
-    protected $table = 'terima_barang';
+    protected $table = 'stok';
 
     protected $guarded = array();
 
@@ -49,9 +47,4 @@ class TerimaBarang extends Model
     {
         return $this->belongsTo(DataBahanBaku::class, 'id');
     }
-    public function supplier()
-    {
-        return $this->belongsTo(DataSupplier::class);
-    }
-
 }

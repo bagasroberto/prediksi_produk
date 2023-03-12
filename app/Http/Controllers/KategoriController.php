@@ -52,6 +52,7 @@ class KategoriController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'nama_kategori' => 'required',
+            'tipe_kategori' => 'required',
             // 'image' => '',
         ]);
 
@@ -87,7 +88,14 @@ class KategoriController extends Controller
         $html = '<div class="form-group">
                      <label for="nama_kategori">Nama Kategori:</label>
                      <input type="text" class="form-control" name="nama_kategori" id="editNamaKategori" value="' . $data->nama_kategori . '">
-                 </div>';
+                 </div>
+                 <div class="form-group">
+                    <label for="tipe_kategori">Tipe Kategori</label>
+                    <select class="form-control" name="tipe_kategori" id="editTipeKategori">
+                        <option value="Bahan Baku" id="tipe_kategori">Bahan Baku</option>
+                        <option value="Barang" id="tipe_kategori">Barang</option>
+                    </select>
+                </div>';
 
         return response()->json(['html' => $html]);
     }
@@ -99,6 +107,7 @@ class KategoriController extends Controller
     {
         $validator = \Validator::make($request->all(), [
             'nama_kategori' => '',
+            'tipe_kategori' => '',
             // 'image' => '',
         ]);
 

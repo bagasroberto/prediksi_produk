@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('alamat_supplier', 120);
             $table->string('email_supplier', 50);
             $table->string('tlp_supplier', 15);
+            $table->string('kategori_supplier')->nullable();
             $table->string('status_supplier', 15)->default('aktif');
             $table->timestamps();
         });

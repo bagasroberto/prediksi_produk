@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\DataBarang;
+use App\Models\DataBahanBaku;
 use App\Models\Kategori;
 use DataTables;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use DB;
 
-class DataBarangController extends Controller
+class DataBahanBakuController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,18 +18,18 @@ class DataBarangController extends Controller
     public function index()
     {
         $kategori = Kategori::all();
-        $databarang = DataBarang::all();
-        return view('master-data.data-barang', compact('kategori', 'databarang'));
+        $databahanbaku = DataBahanBaku::all();
+        return view('master-data.data-bahan-baku', compact('kategori', 'databahanbaku'));
 
     }
 
-    public function getDataBarang(Request $request, DataBarang $databarang)
+    public function getDataBahanBaku(Request $request, DataBahanBaku $databahanbaku)
     {
 
         if ($request->ajax()) {
 
             if (!empty($request->filter_status)) {
-                $data = DB::table('data_barang')
+                $data = DB::table('data_bahan_baku')
                     ->select('*')
                     ->where('status', $request->filter_status)
                     ->get();
@@ -37,7 +37,7 @@ class DataBarangController extends Controller
                     // dd($data);
             }
             else {
-                $data = DB::table('data_barang')
+                $data = DB::table('data_bahan_baku')
                 ->select('*')
                 ->get();
             }
@@ -79,13 +79,14 @@ class DataBarangController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, DataBarang $databarang)
+    public function store(Request $request, DataBahanBaku $databahanbaku)
     {
         // dd($request->all());
 
         $validator = Validator::make($request->all(), [
-            'nama_barang' => 'required',
-            'harga_barang' => 'required',
+            'nama_bahan_baku' => 'required',
+            'harga_bahan_baku' => 'required',
+            // 'stok_bahan_baku' => 'required',
             'kategori_id' => 'required',
             'status' => 'required',
             // 'image' => '',
@@ -99,7 +100,7 @@ class DataBarangController extends Controller
             return response()->json(['errors' => $validator->errors()->all()]);
         }
 
-        $databarang->storeData($request->all());
+        $databahanbaku->storeData($request->all());
 
         return response()->json(['success' => 'Article added successfully']);
 
@@ -120,8 +121,8 @@ class DataBarangController extends Controller
     public function edit(string $id)
     {
 
-        $databarang = new DataBarang;
-        $data = $databarang->findData($id);
+        $databahanbaku = new DataBahanBaku;
+        $data = $databahanbaku->findData($id);
 
         $datakategori = new Kategori;
         $kategoriAll = Kategori::all();
@@ -132,12 +133,12 @@ class DataBarangController extends Controller
         // dd($dtKategori);
 
         $html = '<div class="form-group">
-                     <label for="nama_barang">Nama Produk:</label>
-                     <input type="text" class="form-control" name="nama_barang" id="editNamaBarang" value="' . $data->nama_barang . '">
+                     <label for="nama_bahan_baku">Nama Bahan Baku:</label>
+                     <input type="text" class="form-control" name="nama_bahan_baku" id="editNamaBahanBaku" value="' . $data->nama_bahan_baku . '">
                  </div>
                  <div class="form-group">
-                     <label for="harga_barang">Harga:</label>
-                     <input type="text" class="form-control" name="harga_barang" id="editHargaBarang" value="' . $data->harga_barang . '">
+                     <label for="harga_bahan_baku">Harga:</label>
+                     <input type="text" class="form-control" name="harga_bahan_baku" id="editHargaBahanBaku" value="' . $data->harga_bahan_baku . '">
                  </div>
                  <div class="form-group">
                         <label for="exampleFormControlSelect1">Kategori</label>
@@ -157,7 +158,13 @@ class DataBarangController extends Controller
                         <option value="aktif" id="status">Aktif</option>
                         <option value="non-aktif" id="status">Non Aktif</option>
                     </select>
-                </div>';
+                </div>
+
+
+
+
+
+        ';
 
         return response()->json(['html' => $html]);
     }
@@ -168,8 +175,9 @@ class DataBarangController extends Controller
     public function update(Request $request, string $id)
     {
         $validator = \Validator::make($request->all(), [
-            'nama_barang' => 'required',
-            'harga_barang' => 'required',
+            'nama_bahan_baku' => 'required',
+            'harga_bahan_baku' => 'required',
+            // 'stok_bahan_baku' => 'required',
             'kategori_id' => '',
             'status' => '',
             // 'image' => '',
@@ -181,8 +189,8 @@ class DataBarangController extends Controller
 
         // dd($validator);
 
-        $databarang = new DataBarang;
-        $databarang->updateData($id, $request->all());
+        $databahanbaku = new DataBahanBaku;
+        $databahanbaku->updateData($id, $request->all());
 
         return response()->json(['success' => 'Article updated successfully']);
 
@@ -194,8 +202,8 @@ class DataBarangController extends Controller
     public function destroy(string $id)
     {
         {
-            $databarang = new DataBarang;
-            $databarang->deleteData($id);
+            $databahanbaku = new DataBahanBaku;
+            $databahanbaku->deleteData($id);
 
             // return redirect('data-barang')->with(['success' => 'Berhasil Hapus Data']);
             return response()->json(['success' => 'Article deleted successfully']);

@@ -9,23 +9,48 @@ class KeluarBarang extends Model
 {
     use HasFactory;
 
-    protected $guarded = ['id', 'created_at', 'updated_at'];
+    // protected $guarded = ['id', 'created_at', 'updated_at'];
 
     protected $table = 'keluar_barang';
 
+    protected $guarded = array();
+
+    public function getData()
+    {
+        return static::orderBy('created_at', 'desc')->get();
+    }
 
     public function storeData($input)
     {
         return static::create($input);
     }
 
+    public function findData($id)
+    {
+        return static::find($id);
+    }
+
+    public function updateData($id, $input)
+    {
+        return static::find($id)->update($input);
+    }
+
+    public function deleteData($id)
+    {
+        return static::find($id)->delete();
+    }
+
+    public function databarang()
+    {
+        return $this->belongsTo(DataBarang::class, 'id');
+    }
+
+    public function databahanbaku()
+    {
+        return $this->belongsTo(DataBahanBaku::class, 'id');
+    }
     public function supplier()
     {
         return $this->belongsTo(DataSupplier::class);
-    }
-
-    public function barang()
-    {
-        return $this->belongsTo(DataBarang::class);
     }
 }

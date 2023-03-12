@@ -30,7 +30,7 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col">
-                            <h5>Data Return</h5>
+                            <h5>Data Return Barang</h5>
                         </div>
                     </div>
 
@@ -40,7 +40,7 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Nama Barang / Bahan Baku</th>
+                                <th>Nama Barang</th>
                                 <th style="width: 20%;">Stok</th>
                                 <th style="width: 20%;">Stok Rusak</th>
                                 <th style="width: 20%;">Status</th>
@@ -136,13 +136,13 @@
             pageLength: 10,
             // scrollX: true,
             "order": [[ 0, "asc" ]],
-            ajax: '{{ route('data-return-get') }}',
+            ajax: '{{ route('return-barang-get') }}',
             columns: [
                 {data: 'DT_RowIndex', name: 'id'},
-                {data: 'nama_barang_bahan_baku', name: 'nama_barang_bahan_baku'},
+                {data: 'nama_barang', name: 'nama_barang'},
                 {data: 'stok', name: 'stok'},
                 {data: 'stok_rusak', name: 'stok_rusak'},
-                {data: 'status', name: 'status',orderable:false,serachable:false,sClass:'text-center'},
+                {data: 'statusBadge', name: 'statusBadge',orderable:false,serachable:false,sClass:'text-center'},
                 {data: 'Actions', name: 'Actions',orderable:false,serachable:false,sClass:'text-center'},
             ]
         });
@@ -160,7 +160,7 @@
             $('.alert-danger').hide();
             id = $(this).data('id');
             $.ajax({
-                url: "data-return/"+id+"/edit",
+                url: "return-barang/"+id+"/edit",
                 method: 'GET',
                 // data: {
                 //     id: id,
@@ -182,10 +182,11 @@
                 }
             });
             $.ajax({
-                url: "data-return/"+id,
+                url: "return-barang/"+id,
                 method: 'PUT',
                 data: {
                     stok: $('#editStok').val(),
+                    stok_rusak: $('#editStokRusak').val(),
                 },
                 success: function(result) {
                     if(result.errors) {

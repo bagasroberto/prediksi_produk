@@ -9,13 +9,13 @@
             <div class="row align-items-center">
                 <div class="col-md-12">
                     <div class="page-header-title">
-                        <h5 class="m-b-10">Transaksi</h5>
+                        <h5 class="m-b-10">Master Barang</h5>
                     </div>
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="dashboard"><i class="feather icon-home"></i></a>
                         </li>
-                        <li class="breadcrumb-item"><a href="#!">Transaksi Barang</a></li>
-                        <li class="breadcrumb-item"><a href="data-barang">Data Pengeluaran Barang</a></li>
+                        <li class="breadcrumb-item"><a href="#!">Master Barang</a></li>
+                        <li class="breadcrumb-item"><a href="data-barang">Data Bahan Baku</a></li>
                     </ul>
                 </div>
             </div>
@@ -30,7 +30,7 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col">
-                            <h5>Data Pengeluaran Barang</h5>
+                            <h5>Data Bahan Baku</h5>
                         </div>
                         <div class="col">
                             <button style="float: right" type="button" class="btn btn-info btn-sm" data-toggle="modal"
@@ -42,16 +42,33 @@
 
                 </div>
                 <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+
+
+                            <div class="input-group">
+                                <select class="custom-select" id="filter_status">
+                                    <option value="">--Select Status--</option>
+                                    <option value="aktif">Active</option>
+                                    <option value="non-aktif">Deactive</option>
+                                </select>
+                                <div class="input-group-append">
+                                    <button type="button" name="filter" id="filter" class="btn btn-info ml-2 mr-2">Filter</button>
+                                    <button type="button" name="reset" id="reset" class="btn btn-info">Reset</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="divider"></div>
                     <table class="table table-striped table-bordered datatable">
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Nama Supplier</th>
-                                <th>Nama Barang / Bahan Baku</th>
-                                <th>Alamat</th>
-                                <th>Telepon</th>
-                                {{-- <th>Status</th> --}}
-                                <th style="width: 10%;">Action</th>
+                                <th>Nama Bahan Baku</th>
+                                <th>Harga</th>
+                                {{-- <th>Stok</th> --}}
+                                <th>Status</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -65,6 +82,10 @@
         <!-- [ form-element ] end -->
     </div>
     <!-- [ Main Content ] end -->
+
+
+
+
 
     <div class="modal" id="CreateArticleModal">
         <div class="modal-dialog">
@@ -87,48 +108,36 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-
                     <div class="form-group">
-                        <label for="exampleFormControlSelect1">Supplier : </label>
-                        <select class="form-control" id="supplier_id" name="supplier_id">
-                            <option selected>Pilih Supplier</option>
-                            @foreach ($datasupplier as $item)
-                            <option value="{{ $item->id }}" id="supplier_id">{{
-                                $item->nama_supplier}}</option>
+                        <label for="nama_produk">Nama Bahan Baku:</label>
+                        <input type="text" class="form-control" name="nama_bahan_baku" id="nama_bahan_baku">
+                    </div>
+                    <div class="form-group">
+                        <label for="harga">Harga:</label>
+                        <input type="text" class="form-control" name="harga_bahan_baku" id="harga_bahan_baku">
+                    </div>
+                    {{-- <div class="form-group">
+                        <label for="stok">Stok:</label>
+                        <input type="text" class="form-control" name="stok_bahan_baku" id="stok_bahan_baku">
+                    </div> --}}
+                    <div class="form-group">
+                        <label for="exampleFormControlSelect1">Kategori</label>
+                        <select class="form-control" id="kategori_id" name="kategori_id">
+                            <option selected>Pilih Kategori</option>
+                            @foreach ($kategori as $item)
+                            <option value="{{ $item->id }}" id="kategori_id">{{
+                                $item->nama_kategori}}</option>
                             @endforeach
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <label for="exampleFormControlSelect1">Barang : </label>
-                        <select class="form-control" id="barang_id" name="barang_id">
-                            <option value="" selected>Pilih Barang</option>
-                            @foreach ($databarang as $item)
-                            <option value="{{ $item->id }}" id="barang_id">{{
-                                $item->nama_barang}}</option>
-                            @endforeach
+                        <label for="status">Status</label>
+                        <select class="form-control" name="status" id="status">
+                            <option selected>Pilih status</option>
+                            <option value="aktif">Aktif</option>
+                            <option value="non-aktif">Non Aktif</option>
                         </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="exampleFormControlSelect1">Bahan Baku : </label>
-                        <select class="form-control" id="bahan_baku_id" name="bahan_baku_id">
-                            <option value="" selected>Pilih Bahan Baku</option>
-                            @foreach ($databahanbaku as $item)
-                            <option value="{{ $item->id }}" id="bahan_baku_id">{{
-                                $item->nama_bahan_baku}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="stok_keluar">Stok Keluar :</label>
-                        <input type="number" class="form-control" name="stok_keluar" id="stok_keluar">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="tgl_keluar">Tanggal Keluar:</label>
-                        <input type="date" class="form-control" name="tgl_keluar" id="tgl_keluar">
                     </div>
 
                 </div>
@@ -150,7 +159,7 @@
             <div class="modal-content">
                 <!-- Modal Header -->
                 <div class="modal-header">
-                    <h5 class="modal-title">Detail Data</h5>
+                    <h5 class="modal-title">Edit Data</h5>
                     <button type="button" class="close modelClose" data-dismiss="modal">&times;</button>
                 </div>
                 <!-- Modal body -->
@@ -161,7 +170,7 @@
                         </button>
                     </div>
                     <div class="alert alert-success alert-dismissible fade show" role="alert" style="display: none;">
-                        <strong>Success!</strong>Data updated successfully.
+                        <strong>Success!</strong>Article was added successfully.
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -173,7 +182,7 @@
                 </div>
                 <!-- Modal footer -->
                 <div class="modal-footer">
-                    {{-- <button type="button" class="btn btn-success" id="SubmitEditArticleForm">Update</button> --}}
+                    <button type="button" class="btn btn-success" id="SubmitEditArticleForm">Update</button>
                     <button type="button" class="btn btn-danger modelClose" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -248,18 +257,51 @@
             pageLength: 10,
             // scrollX: true,
             "order": [[ 0, "asc" ]],
-            ajax: '{{ route('keluar-barang-get') }}',
+            ajax:{
+                url: "{{ route('data-bahan-baku-get') }}",
+                data:{filter_status:filter_status}
+            },
+            // ajax: {
+            //     url: "{{ route('data-barang-get') }}",
+            //     data: function (d) {
+            //             d.filter_status = $('#filter_status').val()
+            //         }
+            //     },
+
+            // ajax: '{{ route('data-barang-get') }}',
             columns: [
                 {data: 'DT_RowIndex', name: 'id'},
-                {data: 'nama_supplier', name: 'nama_supplier'},
-                {data: 'nama_barang_bahan_baku', name: 'nama_barang_bahan_baku'},
-                {data: 'alamat_supplier', name: 'alamat_supplier'},
-                {data: 'tlp_supplier', name: 'tlp_supplier'},
+                {data: 'nama_bahan_baku', name: 'nama_bahan_baku'},
+                {data: 'harga_bahan_baku',render: $.fn.dataTable.render.number(',', '.', 3, 'Rp. ')},
+                // {data: 'stok_barang', name: 'stok_barang'},
+                {data: 'statusBadge', name: 'statusBadge',orderable:false,serachable:false,sClass:'text-center'},
                 {data: 'Actions', name: 'Actions',orderable:false,serachable:false,sClass:'text-center'},
             ]
         });
 
     }
+
+
+        // Filter Status
+        $('#filter').click(function(){
+            var filter_status = $('#filter_status').val();
+
+            if(filter_status != '')
+            {
+                $('.datatable').DataTable().destroy();
+                fill_datatable(filter_status);
+            }
+            else
+            {
+                alert('Select Both filter option');
+            }
+        });
+
+        $('#reset').click(function(){
+            $('#filter_status').val('');
+            $('.datatable').DataTable().destroy();
+            fill_datatable();
+        });
 
         // Create article Ajax request.
         $('#SubmitCreateArticleForm').click(function(e) {
@@ -270,15 +312,15 @@
                 }
             });
             $.ajax({
-                url: "{{ route('keluar-barang.store') }}",
+                url: "{{ route('data-bahan-baku.store') }}",
 
                 method: 'post',
                 data: {
-                    supplier_id: $('#supplier_id').val(),
-                    barang_id: $('#barang_id').val(),
-                    bahan_baku_id: $('#bahan_baku_id').val(),
-                    stok_keluar: $('#stok_keluar').val(),
-                    tgl_keluar: $('#tgl_keluar').val(),
+                    nama_bahan_baku: $('#nama_bahan_baku').val(),
+                    harga_bahan_baku: $('#harga_bahan_baku').val(),
+                    // stok_bahan_baku: $('#stok_bahan_baku').val(),
+                    kategori_id: $('#kategori_id').val(),
+                    status: $('#status').val()
                     // image: $('#image').val(),
                 },
                 success: function(result) {
@@ -313,8 +355,11 @@
             $('.alert-danger').hide();
             id = $(this).data('id');
             $.ajax({
-                url: "keluar-barang/"+id+"/edit",
+                url: "data-bahan-baku/"+id+"/edit",
                 method: 'GET',
+                // data: {
+                //     id: id,
+                // },
                 success: function(result) {
                     console.log(result);
                     $('#EditArticleModalBody').html(result.html);
@@ -332,12 +377,14 @@
                 }
             });
             $.ajax({
-                url: "keluar-barang/"+id,
+                url: "data-bahan-baku/"+id,
                 method: 'PUT',
                 data: {
-                    stok_diterima: $('#editStokDiterima').val(),
-                    stok_normal: $('#editStokNormal').val(),
-                    stok_rusak: $('#editStokRusak').val(),
+                    nama_bahan_baku: $('#editNamaBahanBaku').val(),
+                    harga_bahan_baku: $('#editHargaBahanBaku').val(),
+                    // stok_bahan_baku: $('#editStokBahanBaku').val(),
+                    kategori_id: $('#editKategori').val(),
+                    status: $('#editStatus').val(),
                 },
                 success: function(result) {
                     if(result.errors) {
@@ -375,7 +422,7 @@
                 }
             });
             $.ajax({
-                url: "data-barang/"+id,
+                url: "data-bahan-baku/"+id,
                 method: 'DELETE',
                 success: function(result) {
                         $('.alert-danger').hide();
