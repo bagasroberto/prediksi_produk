@@ -42,13 +42,22 @@
 
                 </div>
                 <div class="card-body">
-                    <div class="form-group">
-                        <label><strong>Status :</strong></label>
-                        <select id='filter_status' class="form-control form-control-sm" style="width: 200px">
-                            <option value="">--Select Status--</option>
-                            <option value="aktif">Active</option>
-                            <option value="non-aktif">Deactive</option>
-                        </select>
+                    <div class="row">
+                        <div class="col-md-4">
+
+
+                            <div class="input-group">
+                                <select class="custom-select" id="filter_status">
+                                    <option value="">--Select Status--</option>
+                                    <option value="aktif">Active</option>
+                                    <option value="non-aktif">Deactive</option>
+                                </select>
+                                <div class="input-group-append">
+                                    <button type="button" name="filter" id="filter" class="btn btn-info ml-2 mr-2">Filter</button>
+                                    <button type="button" name="reset" id="reset" class="btn btn-info">Reset</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="divider"></div>
                     <table class="table table-striped table-bordered datatable">
@@ -57,7 +66,6 @@
                                 <th>No</th>
                                 <th>Nama Produk</th>
                                 <th>Harga</th>
-                                <th>Stok</th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
@@ -108,20 +116,6 @@
                         <input type="text" class="form-control" name="harga_barang" id="harga_barang">
                     </div>
                     <div class="form-group">
-                        <label for="stok">Stok:</label>
-                        <input type="text" class="form-control" name="stok_barang" id="stok_barang">
-                    </div>
-                    {{--
-                    <div class="form-group">
-                        <label for="image">Foto Barang</label>
-                        <img class="img-preview img-fluid mb-3 col-sm-5">
-
-                        <input class="form-control @error('image') is-invalid @enderror" type="file" id="image"
-                            name="image" onchange="previewImage()">
-
-                    </div> --}}
-
-                    <div class="form-group">
                         <label for="exampleFormControlSelect1">Kategori</label>
                         <select class="form-control" id="kategori_id" name="kategori_id">
                             <option selected>Pilih Kategori</option>
@@ -171,7 +165,7 @@
                         </button>
                     </div>
                     <div class="alert alert-success alert-dismissible fade show" role="alert" style="display: none;">
-                        <strong>Success!</strong>Article was added successfully.
+                        <strong>Success!</strong>Data updated successfully.
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -245,6 +239,11 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
+
+        fill_datatable();
+
+        function fill_datatable(filter_status = '') {
+
         // init datatable.
         var dataTable = $('.datatable').DataTable({
             processing: true,
@@ -253,28 +252,49 @@
             pageLength: 10,
             // scrollX: true,
             "order": [[ 0, "asc" ]],
-            ajax: {
+            ajax:{
                 url: "{{ route('data-barang-get') }}",
-                data: function (d) {
-                        d.filter_status = $('#filter_status').val()
-                    }
-                },
+                data:{filter_status:filter_status}
+            },
+            // ajax: {
+            //     url: "{{ route('data-barang-get') }}",
+            //     data: function (d) {
+            //             d.filter_status = $('#filter_status').val()
+            //         }
+            //     },
 
             // ajax: '{{ route('data-barang-get') }}',
             columns: [
                 {data: 'DT_RowIndex', name: 'id'},
                 {data: 'nama_barang', name: 'nama_barang'},
                 {data: 'harga_barang',render: $.fn.dataTable.render.number(',', '.', 3, 'Rp. ')},
-                {data: 'stok_barang', name: 'stok_barang'},
                 {data: 'statusBadge', name: 'statusBadge',orderable:false,serachable:false,sClass:'text-center'},
                 {data: 'Actions', name: 'Actions',orderable:false,serachable:false,sClass:'text-center'},
             ]
         });
 
+    }
+
 
         // Filter Status
-        $('#filter_status').change(function(){
-            dataTable.draw();
+        $('#filter').click(function(){
+            var filter_status = $('#filter_status').val();
+
+            if(filter_status != '')
+            {
+                $('.datatable').DataTable().destroy();
+                fill_datatable(filter_status);
+            }
+            else
+            {
+                alert('Select Both filter option');
+            }
+        });
+
+        $('#reset').click(function(){
+            $('#filter_status').val('');
+            $('.datatable').DataTable().destroy();
+            fill_datatable();
         });
 
         // Create article Ajax request.
@@ -292,7 +312,6 @@
                 data: {
                     nama_barang: $('#nama_barang').val(),
                     harga_barang: $('#harga_barang').val(),
-                    stok_barang: $('#stok_barang').val(),
                     kategori_id: $('#kategori_id').val(),
                     status: $('#status').val()
                     // image: $('#image').val(),
@@ -356,7 +375,6 @@
                 data: {
                     nama_barang: $('#editNamaBarang').val(),
                     harga_barang: $('#editHargaBarang').val(),
-                    stok_barang: $('#editStokBarang').val(),
                     kategori_id: $('#editKategori').val(),
                     status: $('#editStatus').val(),
                 },

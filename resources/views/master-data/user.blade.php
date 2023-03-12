@@ -219,8 +219,8 @@
                     name: 'DT_RowIndex'
                 },
                 {
-                    data: 'name',
-                    name: 'name'
+                    data: 'username',
+                    name: 'username'
                 },
                 {
                     data: 'email',

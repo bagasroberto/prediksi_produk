@@ -41,9 +41,20 @@
                             Barang</span></a>
                     <ul class="pcoded-submenu">
                         <li><a href="data-barang">Data Barang</a></li>
-                        <li><a href="kategori">Kategori Barang</a></li>
-                        <li><a href="data-barangDisc">Discontinue Barang</a></li>
+                        <li><a href="data-bahan-baku">Data Bahan Baku</a></li>
+                        <li><a href="kategori">Kategori Data</a></li>
+                        <li><a href="stok">Stok</a></li>
+                        {{-- <li><a href="data-return">Barang Return</a></li> --}}
                         <li><a href="data-supplier">Supplier</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item pcoded-hasmenu">
+                    <a href="#!" class="nav-link "><span class="pcoded-micon"><i
+                                class="feather icon-layout"></i></span><span class="pcoded-mtext">Data Return</span></a>
+                    <ul class="pcoded-submenu">
+                        <li><a href="return-barang">Data Return Barang</a></li>
+                        <li><a href="return-bahan-baku">Data Return Bahan Baku</a></li>
                     </ul>
                 </li>
 
@@ -53,7 +64,7 @@
                     <ul class="pcoded-submenu">
                         <li><a href="terima-barang">Penerimaan Barang</a></li>
                         <li><a href="keluar-barang">Pengeluaran Barang</a></li>
-                        <li><a href="#">Pemesanan ke Supplier</a></li>
+                        {{-- <li><a href="#">Pemesanan ke Supplier</a></li> --}}
                     </ul>
                 </li>
 

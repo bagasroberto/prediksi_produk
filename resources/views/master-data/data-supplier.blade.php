@@ -47,9 +47,10 @@
                             <tr>
                                 <th>No</th>
                                 <th>Nama Supplier</th>
-                                <th>Alamat</th>
+                                {{-- <th>Alamat</th> --}}
                                 <th>Email</th>
                                 <th>Telepon</th>
+                                <th>Kategori</th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
@@ -109,6 +110,17 @@
                         <input type="number" class="form-control" id="tlp-supplier" name="tlp-supplier">
                         <div class="alert alert-danger mt-2 d-none" role="alert" id="alert-tlp-supplier"></div>
                     </div>
+
+                    <div class="form-group">
+                        <label for="" class="control-label">Kategori Supplier</label>
+                        <select class="form-control" name="kategori-supplier" id="kategori-supplier">
+                            <option selected>Pilih Kategori Supplier</option>
+                            <option value="Barang">Barang</option>
+                            <option value="Bahan Baku">Bahan Baku</option>
+                        </select>
+                    </div>
+
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">TUTUP</button>
@@ -160,13 +172,17 @@
                     data: 'email_supplier',
                     name: 'email_supplier'
                 },
-                {
-                    data: 'alamat_supplier',
-                    name: 'alamat_supplier'
-                },
+                // {
+                //     data: 'alamat_supplier',
+                //     name: 'alamat_supplier'
+                // },
                 {
                     data: 'tlp_supplier',
                     name: 'tlp_supplier'
+                },
+                {
+                    data: 'kategori_supplier',
+                    name: 'kategori_supplier'
                 },
                 {
                     data: 'status',
@@ -205,6 +221,7 @@
                     email_supplier: $('#email-supplier').val(),
                     alamat_supplier: $('#alamat-supplier').val(),
                     tlp_supplier: $('#tlp-supplier').val(),
+                    kategori_supplier: $('#kategori-supplier').val(),
                 },
                 // data: $('#supplierForm').serialize(),
                 type: "POST",
@@ -255,6 +272,7 @@
                 $('#email-supplier').val(data.email_supplier);
                 $('#alamat-supplier').val(data.alamat_supplier);
                 $('#tlp-supplier').val(data.tlp_supplier);
+                $('#kategori-supplier').val(data.kategori_supplier);
             })
         });
 

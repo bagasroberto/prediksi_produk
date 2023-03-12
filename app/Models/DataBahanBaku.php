@@ -5,13 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TerimaBarang extends Model
+class DataBahanBaku extends Model
 {
     use HasFactory;
 
-    // protected $guarded = ['id', 'created_at', 'updated_at'];
-
-    protected $table = 'terima_barang';
+    protected $table = 'data_bahan_baku';
 
     protected $guarded = array();
 
@@ -40,18 +38,7 @@ class TerimaBarang extends Model
         return static::find($id)->delete();
     }
 
-    public function databarang()
-    {
-        return $this->belongsTo(DataBarang::class, 'id');
+    public function kategori(){
+        return $this->hasMany(Kategori::class, 'kategori_id');
     }
-
-    public function databahanbaku()
-    {
-        return $this->belongsTo(DataBahanBaku::class, 'id');
-    }
-    public function supplier()
-    {
-        return $this->belongsTo(DataSupplier::class);
-    }
-
 }

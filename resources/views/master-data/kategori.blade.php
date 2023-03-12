@@ -47,6 +47,7 @@
                             <tr>
                                 <th style="width : 10%;">No</th>
                                 <th>Nama Kategori</th>
+                                <th>Tipe Kategori</th>
                                 <th style="width : 20%;" class="text-center">Action</th>
                             </tr>
                         </thead>
@@ -87,6 +88,14 @@
                         <label for="nama_kategori">Nama Kategori:</label>
                         <input type="text" class="form-control" name="nama_kategori" id="nama_kategori">
                     </div>
+                    <div class="form-group">
+                        <label for="tipe_kategori">Tipe Kategori</label>
+                        <select class="form-control" name="tipe_kategori" id="tipe_kategori">
+                            <option selected>Pilih status</option>
+                            <option value="Bahan Baku">Bahan Baku</option>
+                            <option value="Barang">Barang</option>
+                        </select>
+                    </div>
                 </div>
                 <!-- Modal footer -->
                 <div class="modal-footer">
@@ -114,7 +123,7 @@
                         </button>
                     </div>
                     <div class="alert alert-success alert-dismissible fade show" role="alert" style="display: none;">
-                        <strong>Success!</strong>Article was added successfully.
+                        <strong>Success!</strong>Data updated successfully.
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -198,6 +207,7 @@
             columns: [
                 {data: 'id', name: 'id'},
                 {data: 'nama_kategori', name: 'nama_kategori'},
+                {data: 'tipe_kategori', name: 'tipe_kategori'},
                 {data: 'Actions', name: 'Actions',orderable:false,serachable:false,sClass:'text-center'},
             ]
         });
@@ -218,7 +228,8 @@
                 // cache: false,
                 method: 'post',
                 data: {
-                    nama_kategori: $('#nama_kategori').val()
+                    nama_kategori: $('#nama_kategori').val(),
+                    tipe_kategori: $('#tipe_kategori').val(),
                     // image: $('#image').val(),
                 },
                 success: function(result) {
@@ -278,7 +289,8 @@
                 url: "kategori/"+id,
                 method: 'PUT',
                 data: {
-                    nama_kategori: $('#editNamaKategori').val()
+                    nama_kategori: $('#editNamaKategori').val(),
+                    tipe_kategori: $('#editTipeKategori').val(),
                 },
                 success: function(result) {
                     if(result.errors) {

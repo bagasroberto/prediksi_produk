@@ -9,13 +9,13 @@
             <div class="row align-items-center">
                 <div class="col-md-12">
                     <div class="page-header-title">
-                        <h5 class="m-b-10">Transaksi</h5>
+                        <h5 class="m-b-10">Master Barang</h5>
                     </div>
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="dashboard"><i class="feather icon-home"></i></a>
                         </li>
-                        <li class="breadcrumb-item"><a href="#!">Transaksi Barang</a></li>
-                        <li class="breadcrumb-item"><a href="data-barang">Data Pengeluaran Barang</a></li>
+                        <li class="breadcrumb-item"><a href="#!">Master Barang</a></li>
+                        <li class="breadcrumb-item"><a href="data-barang">Stok</a></li>
                     </ul>
                 </div>
             </div>
@@ -30,7 +30,7 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col">
-                            <h5>Data Pengeluaran Barang</h5>
+                            <h5>Data Stok</h5>
                         </div>
                         <div class="col">
                             <button style="float: right" type="button" class="btn btn-info btn-sm" data-toggle="modal"
@@ -45,13 +45,10 @@
                     <table class="table table-striped table-bordered datatable">
                         <thead>
                             <tr>
-                                <th>No</th>
-                                <th>Nama Supplier</th>
+                                <th style="width : 10%;">No</th>
                                 <th>Nama Barang / Bahan Baku</th>
-                                <th>Alamat</th>
-                                <th>Telepon</th>
-                                {{-- <th>Status</th> --}}
-                                <th style="width: 10%;">Action</th>
+                                <th style="width:20%;">Stok</th>
+                                <th style="width : 20%;" class="text-center">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -87,50 +84,28 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-
                     <div class="form-group">
-                        <label for="exampleFormControlSelect1">Supplier : </label>
-                        <select class="form-control" id="supplier_id" name="supplier_id">
-                            <option selected>Pilih Supplier</option>
-                            @foreach ($datasupplier as $item)
-                            <option value="{{ $item->id }}" id="supplier_id">{{
-                                $item->nama_supplier}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="exampleFormControlSelect1">Barang : </label>
-                        <select class="form-control" id="barang_id" name="barang_id">
-                            <option value="" selected>Pilih Barang</option>
+                        <label for="nama_barang">Nama Barang</label>
+                        <select class="form-control" name="barang_id" id="barang_id">
+                            <option value="">Pilih Barang</option>
                             @foreach ($databarang as $item)
-                            <option value="{{ $item->id }}" id="barang_id">{{
-                                $item->nama_barang}}</option>
+                            <option value="{{ $item->id }}">{{ $item->nama_barang }}</option>
                             @endforeach
                         </select>
                     </div>
-
                     <div class="form-group">
-                        <label for="exampleFormControlSelect1">Bahan Baku : </label>
-                        <select class="form-control" id="bahan_baku_id" name="bahan_baku_id">
-                            <option value="" selected>Pilih Bahan Baku</option>
+                        <label for="nama_bahan_baku">Nama Bahan Baku</label>
+                        <select class="form-control" name="bahan_baku_id" id="bahan_baku_id">
+                            <option value="">Pilih Barang</option>
                             @foreach ($databahanbaku as $item)
-                            <option value="{{ $item->id }}" id="bahan_baku_id">{{
-                                $item->nama_bahan_baku}}</option>
+                            <option value="{{ $item->id }}">{{ $item->nama_bahan_baku }}</option>
                             @endforeach
                         </select>
                     </div>
-
                     <div class="form-group">
-                        <label for="stok_keluar">Stok Keluar :</label>
-                        <input type="number" class="form-control" name="stok_keluar" id="stok_keluar">
+                        <label for="stok">Stok:</label>
+                        <input type="text" class="form-control" name="stok" id="stok">
                     </div>
-
-                    <div class="form-group">
-                        <label for="tgl_keluar">Tanggal Keluar:</label>
-                        <input type="date" class="form-control" name="tgl_keluar" id="tgl_keluar">
-                    </div>
-
                 </div>
                 <!-- Modal footer -->
                 <div class="modal-footer">
@@ -141,16 +116,13 @@
         </div>
     </div>
 
-    {{--
-    </form> --}}
-
     <!-- Edit Article Modal -->
     <div class="modal" id="EditArticleModal">
         <div class="modal-dialog">
             <div class="modal-content">
                 <!-- Modal Header -->
                 <div class="modal-header">
-                    <h5 class="modal-title">Detail Data</h5>
+                    <h5 class="modal-title">Edit Data</h5>
                     <button type="button" class="close modelClose" data-dismiss="modal">&times;</button>
                 </div>
                 <!-- Modal body -->
@@ -173,7 +145,7 @@
                 </div>
                 <!-- Modal footer -->
                 <div class="modal-footer">
-                    {{-- <button type="button" class="btn btn-success" id="SubmitEditArticleForm">Update</button> --}}
+                    <button type="button" class="btn btn-success" id="SubmitEditArticleForm">Update</button>
                     <button type="button" class="btn btn-danger modelClose" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -210,6 +182,7 @@
 
 @endsection
 
+
 @push('script')
 
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
@@ -218,11 +191,8 @@
 <script type="text/javascript" src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js"></script>
 @endpush
 
-
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js">
-</script>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
 
 <script type="text/javascript">
     $.ajaxSetup({
@@ -235,11 +205,6 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
-
-        fill_datatable();
-
-        function fill_datatable(filter_status = '') {
-
         // init datatable.
         var dataTable = $('.datatable').DataTable({
             processing: true,
@@ -248,18 +213,14 @@
             pageLength: 10,
             // scrollX: true,
             "order": [[ 0, "asc" ]],
-            ajax: '{{ route('keluar-barang-get') }}',
+            ajax: '{{ route('stok-get') }}',
             columns: [
                 {data: 'DT_RowIndex', name: 'id'},
-                {data: 'nama_supplier', name: 'nama_supplier'},
                 {data: 'nama_barang_bahan_baku', name: 'nama_barang_bahan_baku'},
-                {data: 'alamat_supplier', name: 'alamat_supplier'},
-                {data: 'tlp_supplier', name: 'tlp_supplier'},
+                {data: 'stok', name: 'stok'},
                 {data: 'Actions', name: 'Actions',orderable:false,serachable:false,sClass:'text-center'},
             ]
         });
-
-    }
 
         // Create article Ajax request.
         $('#SubmitCreateArticleForm').click(function(e) {
@@ -270,15 +231,16 @@
                 }
             });
             $.ajax({
-                url: "{{ route('keluar-barang.store') }}",
-
+                url: "{{ route('stok.store') }}",
+                // enctype: 'multipart/form-data',
+                // processData: false,  // Important!
+                // contentType: false,
+                // cache: false,
                 method: 'post',
                 data: {
-                    supplier_id: $('#supplier_id').val(),
                     barang_id: $('#barang_id').val(),
                     bahan_baku_id: $('#bahan_baku_id').val(),
-                    stok_keluar: $('#stok_keluar').val(),
-                    tgl_keluar: $('#tgl_keluar').val(),
+                    stok: $('#stok').val(),
                     // image: $('#image').val(),
                 },
                 success: function(result) {
@@ -313,8 +275,11 @@
             $('.alert-danger').hide();
             id = $(this).data('id');
             $.ajax({
-                url: "keluar-barang/"+id+"/edit",
+                url: "stok/"+id+"/edit",
                 method: 'GET',
+                // data: {
+                //     id: id,
+                // },
                 success: function(result) {
                     console.log(result);
                     $('#EditArticleModalBody').html(result.html);
@@ -332,12 +297,12 @@
                 }
             });
             $.ajax({
-                url: "keluar-barang/"+id,
+                url: "stok/"+id,
                 method: 'PUT',
                 data: {
-                    stok_diterima: $('#editStokDiterima').val(),
-                    stok_normal: $('#editStokNormal').val(),
-                    stok_rusak: $('#editStokRusak').val(),
+                    barang_id: $('#editNamaBarang').val(),
+                    bahan_baku_id: $('#editNamaBahanBaku').val(),
+                    stok: $('#editStok').val(),
                 },
                 success: function(result) {
                     if(result.errors) {
@@ -358,36 +323,6 @@
                         }, 2000);
                     }
                 }
-            });
-        });
-
-        // Delete article Ajax request.
-        var deleteID;
-        $('body').on('click', '#getDeleteId', function(){
-            deleteID = $(this).data('id');
-        })
-        $('#SubmitDeleteArticleForm').click(function(e) {
-            e.preventDefault();
-            var id = deleteID;
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-            $.ajax({
-                url: "data-barang/"+id,
-                method: 'DELETE',
-                success: function(result) {
-                        $('.alert-danger').hide();
-                        $('.alert-success').show();
-                        $('.datatable').DataTable().ajax.reload();
-                        setInterval(function(){
-                            $('#CreateArticleModal').modal('hide');
-                            location.reload();
-                        }, 2000);
-
-                }
-
             });
         });
     });

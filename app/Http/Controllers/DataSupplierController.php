@@ -79,6 +79,7 @@ class DataSupplierController extends Controller
             'email_supplier' => 'required',
             'alamat_supplier' => 'required',
             'tlp_supplier' => 'required',
+            'kategori_supplier' => 'required',
         ]);
 
         //check if validation fails
@@ -96,6 +97,8 @@ class DataSupplierController extends Controller
             'email_supplier' => $request->email_supplier,
             'alamat_supplier' => $request->alamat_supplier,
             'tlp_supplier' => $request->tlp_supplier,
+            'kategori_supplier' => $request->kategori_supplier,
+
         ]);
 
         //return response
