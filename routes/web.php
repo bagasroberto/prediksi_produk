@@ -5,6 +5,7 @@ use App\Http\Controllers\StokController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\PrediksiController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DataBarangController;
 use App\Http\Controllers\DataReturnController;
@@ -99,6 +100,9 @@ Route::group(['middleware' => ['verified', 'auth']], function () {
     Route::get('return-bahan-baku-get', [BahanBakuReturnController::class, 'getDataReturnBahanBaku'])->name('return-bahan-baku-get')->middleware('auth', 'verified');
     // Data Barang Return
     Route::resource('return-bahan-baku', BahanBakuReturnController::class)->middleware('auth', 'verified');
+
+    Route::get('perhitungan-produksi', [PrediksiController::class, 'perhitungan']);
+    Route::get('hasil-perhitungan', [PrediksiController::class, 'hasilperhitungan']);
 
 
 });

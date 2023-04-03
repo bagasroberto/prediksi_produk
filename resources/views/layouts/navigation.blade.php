@@ -70,14 +70,24 @@
 
 
 
+
                 <li class="nav-item pcoded-menu-caption">
                     <label>Prediksi Produksi</label>
                 </li>
 
-                <li class="nav-item">
+                <li class="nav-item pcoded-hasmenu">
+                    <a href="#!" class="nav-link "><span class="pcoded-micon"><i
+                                class="feather icon-layout"></i></span><span class="pcoded-mtext">Prediksi</span></a>
+                    <ul class="pcoded-submenu">
+                        <li><a href="perhitungan-produksi">Perhitungan Produksi</a></li>
+                        <li><a href="hasil-perhitungan">Hasil Perhitungan</a></li>
+                    </ul>
+                </li>
+
+                {{-- <li class="nav-item">
                     <a href="form_elements.html" class="nav-link "><span class="pcoded-micon"><i
                                 class="feather icon-file-text"></i></span><span class="pcoded-mtext">Prediksi</span></a>
-                </li>
+                </li> --}}
                 <li class="nav-item">
                     <a href="form_elements.html" class="nav-link "><span class="pcoded-micon"><i
                                 class="feather icon-file-text"></i></span><span class="pcoded-mtext">Laporan</span></a>
